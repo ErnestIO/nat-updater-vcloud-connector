@@ -17,7 +17,7 @@ describe 'vcloud_nats_updater_microservice' do
       { router_name: 'adria-vse',
         datacenter_name: 'r3-acidre',
         datacenter_username: 'acidre@r3-acidre',
-        nat_rules: [],
+        rules: [],
         client_name: 'r3labs-development' }
     end
     let!(:datacenter)   { double('datacenter', router: router) }
