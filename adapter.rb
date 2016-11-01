@@ -11,7 +11,6 @@ require 'myst'
 include Myst::Providers::VCloud
 
 def update_nat(data)
-  return false unless data.values_at(:datacenter_name, :client_name, :router_name).compact.length == 3
   credentials = data[:datacenter_username].split('@')
   provider = Provider.new(endpoint:     data[:vcloud_url],
                           organisation: credentials.last,
@@ -24,7 +23,7 @@ def update_nat(data)
   nat = router.nat
   nat.purge_rules
 
-  data[:nat_rules].each do |rule|
+  data[:rules].each do |rule|
     interface_ref = router.interface_network_reference(rule[:network])
     nat.add_rule(rule[:type],
                  { ip: rule[:origin_ip], port: rule[:origin_port] },
